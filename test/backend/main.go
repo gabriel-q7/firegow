@@ -1,4 +1,4 @@
-package backend
+package main
 
 import (
 	"fmt"
@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
+	// Simple test backend
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Backend received: %s %s\n", r.Method, r.URL.Path)
 		fmt.Fprintf(w, "Headers: %v\n", r.Header)

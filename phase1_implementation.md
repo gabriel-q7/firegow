@@ -129,7 +129,15 @@ Create a simple test backend and test various attack scenarios:
 ### Test Scenarios
 
 1. **Normal Request**: `curl http://localhost:8080/api/users`
-2. **SQL Injection**: `curl "http://localhost:8080/api/users?id=1' OR '1'='1"`
+2. **SQL Injection**: `curl "http://localhost:8080/api/users?id=1\' OR \'1\'=\'1\'"`
+ - `curl "http://localhost:8080/api/users?id=1%27%20OR%20%271%27%3D%271"`
+ - `curl -X POST \
+     -H "Content-Type: application/json" \
+     -d '{ "username": "admin", "password": "password\' OR \'1\'=\'1" }' \
+     http://localhost:8080/api/login`
+ - `curl -X POST \
+     -d "username=admin&password=password%27+OR+%271%27%3D%271" \
+     http://localhost:8080/api/login`
 3. **XSS Attack**: `curl -d "comment=<script>alert('xss')</script>" http://localhost:8080/api/comments`
 4. **Rate Limiting**: Run multiple rapid requests
 

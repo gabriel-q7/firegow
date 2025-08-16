@@ -19,7 +19,10 @@ func NewSQLInjectionFilter() *SQLInjectionFilter {
 		`(?i)(\s|^)(union|select|insert|update|delete|drop|create|alter)\s`,
 		`(?i)(\s|^)(or|and)\s+\d+\s*=\s*\d+`,
 		`(?i)(\s|^)(or|and)\s+['"][^'"]*['"]\s*=\s*['"][^'"]*['"]`,
-		`(?i)(--|#|/\*|\*/|;)`,
+		// OLD PATTERN: `(?i)(--|#|/\*|\*/|;)`,
+		// NEW, MORE PRECISE PATTERN: Remove `/\*` and `\*/` to avoid false positives with common headers like 'Accept: */*'.
+		// These specific comment patterns are less likely to appear innocently in headers.
+		`(?i)(--|#|;)`, // Only match '--', '#', or ';' for SQL comment/terminator detection
 		`(?i)(\s|^)(exec|execute|sp_|xp_)`,
 		`(?i)(information_schema|sysobjects|systables)`,
 	}
