@@ -50,6 +50,14 @@ waf-backend/
 │   ├── waf/                     # Public WAF interfaces
 │   ├── models/                  # Data models
 │   └── errors/                  # Custom error types
+├── web/
+│   ├── static/
+│   │   ├── css/                 # Admin panel CSS
+│   │   ├── js/                  # Admin panel JavaScript
+│   │   └── assets/              # Images, fonts, etc.
+│   └── templates/
+│       ├── admin/               # Admin panel templates
+│       └── errors/              # Error page templates
 ├── configs/
 │   ├── waf.yaml                 # Main WAF configuration
 │   ├── rules/                   # WAF rules definitions
